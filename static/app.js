@@ -118,7 +118,7 @@ const TracenApp = {
         }
     },
 
-    // --- LÓGICA: STUDENT ACCESS (Catraca 20s) ---
+    // --- LÓGICA: STUDENT ACCESS (Catraca 10s) ---
     initStudentAccess: () => {
         const nameEl = document.getElementById('studentName');
         const dateEl = document.getElementById('currentDate');
@@ -132,7 +132,7 @@ const TracenApp = {
         if (isError) {
             errorCard?.classList.remove('hidden');
             const errorCountdownEl = document.getElementById('errorCountdown');
-            let s = 20;
+            let s = 10;
             const timer = setInterval(() => {
                 if (--s <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
                 if (errorCountdownEl) errorCountdownEl.textContent = s;
@@ -148,7 +148,7 @@ const TracenApp = {
             if (phraseEl) phraseEl.textContent = `"${MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)]}"`;
 
             const countdownEl = document.getElementById('countdown');
-            let s = 20;
+            let s = 10;
             const timer = setInterval(() => {
                 if (--s <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
                 if (countdownEl) countdownEl.textContent = s;

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracen Academy - Acesso de Alunos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-tracen {
+            background-color: #6741d9;
+        }
+
+        .text-tracen {
+            color: #6741d9;
+        }
+
+        .border-tracen {
+            border-color: #6741d9;
+        }
+
+        .hover-tracen:hover {
+            background-color: #5634b8;
+        }
+
+        .bg-rose-tracen {
+            background-color: #e11d48;
+        }
+
+        .text-rose-tracen {
+            color: #e11d48;
+        }
+
+        /* Teclado numérico melhorado */
+        .btn-numeric {
+            @apply aspect-square text-3xl font-semibold rounded-2xl bg-white border border-gray-200 hover:border-purple-300 hover:bg-purple-50 text-gray-700 hover:text-tracen transition-all active:scale-95 shadow-sm flex items-center justify-center;
+        }
+
+        .btn-clear {
+            @apply aspect-square text-2xl font-bold rounded-2xl bg-orange-50 border border-orange-100 text-orange-600 hover:bg-orange-100 transition-all active:scale-95 shadow-sm flex items-center justify-center;
+        }
+
+        .btn-submit {
+            @apply w-full py-5 text-xl font-bold rounded-2xl bg-gradient-to-br from-purple-600 to-purple-700 text-white hover:from-purple-700 hover:to-purple-800 transition-all active:scale-95 shadow-lg shadow-purple-200 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed;
+        }
+
+        .toast-error {
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+        }
+
+        .toast-exit {
+            animation: slideOut 0.3s ease-in;
+        }
+
+        .input-cpf {
+            letter-spacing: 0.15em;
+        }
+
+        /* Logo de fundo com opacidade */
+        .bg-logo {
+            background-image: url('../static/img/tracen_academy_logo.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-attachment: fixed;
+            opacity: 0.85;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+
+            .btn-numeric,
+            .btn-clear {
+                @apply text-xl;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gradient-to-br from-purple-50 via-white to-purple-50 flex items-center justify-center min-h-screen relative overflow-hidden"
+    style="background-image: url('../static/img/tracen_academy_logo.png'); background-repeat: no-repeat; background-position: center; background-size: 50%; background-attachment: fixed; background-color: rgba(255, 255, 255, 0.95);">
+
+    <!-- Camada de background escurecida para melhor legibilidade -->
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-50/95 via-white/95 to-purple-50/95 pointer-events-none">
+    </div>
+
+    <!-- Decoração de fundo -->
+    <div
+        class="absolute top-0 right-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+    </div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+        style="animation-delay: 2s;"></div>
+
+    <div class="relative z-10 w-full max-w-lg px-6">
+        <!-- Card Principal -->
+        <div
+            class="bg-white rounded-3xl shadow-2xl border-2 border-transparent hover:border-purple-200 transition-all p-6 sm:p-8">
+            <!-- Cabeçalho -->
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-3 sm:p-4 rounded-2xl">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">Bem-vindo à Pista!</h1>
+                <p class="text-gray-500 text-xs sm:text-sm">Insira seu CPF para acessar</p>
+            </div>
+
+            <!-- Input CPF -->
+            <div class="relative mb-8 sm:mb-10">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-5 text-gray-400">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H5a2 2 0 00-2 2v10a2 2 0 002 2h5m0 0h5a2 2 0 002-2V8a2 2 0 00-2-2h-5m0 0V5a2 2 0 012-2h1a2 2 0 012 2v1m0 0h4a2 2 0 012 2v10a2 2 0 01-2 2h-4m0 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v11">
+                        </path>
+                    </svg>
+                </div>
+                <input type="text" id="cpfInput" placeholder="000.000.000-00" maxlength="14"
+                    class="w-full pl-12 sm:pl-14 pr-4 sm:pr-5 py-3 sm:py-4 border-2 border-gray-300 rounded-2xl text-center text-lg sm:text-2xl font-bold text-tracen input-cpf focus:border-tracen focus:ring-2 focus:ring-purple-200 outline-none transition-all bg-gray-50 hover:bg-white"
+                    readonly>
+            </div>
+
+            <!-- Teclado Numérico - MELHORADO -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+                <button class="btn-numeric" data-num="1">1</button>
+                <button class="btn-numeric" data-num="2">2</button>
+                <button class="btn-numeric" data-num="3">3</button>
+
+                <button class="btn-numeric" data-num="4">4</button>
+                <button class="btn-numeric" data-num="5">5</button>
+                <button class="btn-numeric" data-num="6">6</button>
+
+                <button class="btn-numeric" data-num="7">7</button>
+                <button class="btn-numeric" data-num="8">8</button>
+                <button class="btn-numeric" data-num="9">9</button>
+
+                <button id="btnClear" class="btn-clear">C</button>
+                <button class="btn-numeric" data-num="0">0</button>
+                <button id="btnDelete" class="btn-numeric">⌫</button>
+            </div>
+
+            <!-- Botão de Acesso -->
+            <button id="btnSubmit" class="btn-submit flex items-center justify-center gap-3 mb-8" disabled>
+                <span>Confirmar Acesso</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Info Badge -->
+        <div class="mt-6 text-center text-gray-500 text-xs sm:text-xs">
+            <p>💫 Cada galope uma história! Dê o seu melhor na pista.</p>
+        </div>
+    </div>
+
+    <!-- Toast de Erro -->
+    <div id="errorToast"
+        class="hidden fixed bottom-6 left-6 right-6 max-w-sm mx-auto toast-error bg-rose-tracen text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 z-50">
+        <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <span id="errorMessage" class="font-medium flex-1">CPF não encontrado ou bloqueado.</span>
+    </div>
+
+    <script src="../static/api-handler.js"></script>
+    <script src="../static/app.js"></script>
+</body>
+
+</html>

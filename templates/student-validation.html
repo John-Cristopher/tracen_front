@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracen Academy - Validação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-tracen {
+            background-color: #6741d9;
+        }
+
+        .text-tracen {
+            color: #6741d9;
+        }
+
+        .bg-rose-tracen {
+            background-color: #e11d48;
+        }
+
+        .text-rose-tracen {
+            color: #e11d48;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        /* Barra de Timeout - Degradê */
+        @keyframes shrinkGradient {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+
+        .timeout-bar-valid {
+            background: linear-gradient(90deg, #6741d9 0%, #a78bfa 50%, #c4b5fd 100%);
+            animation: shrinkGradient 5s linear forwards;
+        }
+
+        /* Barra de Timeout - Vermelho Sólido */
+        .timeout-bar-invalid {
+            background-color: #e11d48;
+            animation: shrinkGradient 5s linear forwards;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(103, 65, 217, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(103, 65, 217, 0.4);
+            }
+        }
+
+        /* Logo de fundo com opacidade */
+        /* Já adicionado como inline style no body */
+    </style>
+</head>
+
+<body class="bg-white flex items-center justify-center min-h-screen relative overflow-hidden"
+    style="background-image: url('../static/img/tracen_academy_logo.png'); background-repeat: no-repeat; background-position: center; background-size: 50%; background-attachment: fixed; background-color: rgba(255, 255, 255, 0.95);">
+
+    <!-- Camada de background escurecida para melhor legibilidade -->
+    <div class="absolute inset-0 bg-white/95 pointer-events-none"></div>
+    <div
+        class="absolute top-0 right-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse">
+    </div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"
+        style="animation-delay: 2s;"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-lg">
+        <!-- Card de Validação -->
+        <div id="validationCard" class="hidden animate-scale-in">
+            <!-- Ícone de Sucesso -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-full pulse-glow">
+                    <svg class="w-20 h-20 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="text-5xl font-bold text-gray-800 mb-4 animate-slide-down">Seu cadastro está sendo <span
+                    class="text-tracen">validado</span>
+            </h1>
+            <p class="text-lg text-tracen font-semibold mb-8 animate-slide-down" style="animation-delay: 0.4s;">
+                Horário de acesso: <span id="accessTime" class="text-2xl font-bold"></span>
+            </p>
+
+            <!-- Mensagem Motivacional -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-tracen animate-slide-down"
+                style="animation-delay: 0.6s;">
+                <p class="text-lg text-tracen italic font-medium">
+                    "Cada galope uma história! 🏇 Dê o seu melhor na pista hoje!"
+                </p>
+            </div>
+
+            <!-- Contador -->
+            <div class="text-gray-500 text-sm mb-8 animate-slide-down" style="animation-delay: 0.8s;">
+                <p>Redirecionando em <span id="countdown" class="font-bold text-tracen">5</span>s...</p>
+            </div>
+        </div>
+
+        <!-- Card de Erro -->
+        <div id="errorCard" class="hidden animate-scale-in">
+            <!-- Ícone de Erro -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-gradient-to-br from-rose-100 to-rose-200 p-6 rounded-full">
+                    <svg class="w-20 h-20 text-rose-tracen" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="text-4xl font-bold text-gray-800 mb-4 animate-slide-down">
+                Acesso <span class="text-rose-tracen">Bloqueado</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-6 animate-slide-down" style="animation-delay: 0.2s;">
+                Não foi possível validar seu CPF
+            </p>
+
+            <div class="bg-rose-50 p-6 rounded-2xl mb-8 border-l-4 border-rose-tracen animate-slide-down"
+                style="animation-delay: 0.4s;">
+                <p class="text-gray-700 font-medium mb-2">Possíveis motivos:</p>
+                <ul class="text-left text-gray-600 text-sm space-y-1 ml-4">
+                    <li>✗ CPF não encontrado no cadastro</li>
+                    <li>✗ Acesso bloqueado administrativamente</li>
+                    <li>✗ Horário de acesso indisponível</li>
+                </ul>
+            </div>
+
+            <p class="text-gray-500 text-sm mb-8 animate-slide-down" style="animation-delay: 0.6s;">
+                Procure a secretaria da academia para maiores informações.
+            </p>
+
+            <!-- Botões -->
+            <div class="flex gap-4 justify-center animate-slide-down" style="animation-delay: 0.8s;">
+                <a href="index.html"
+                    class="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+                    ← Voltar
+                </a>
+                <a href="index.html"
+                    class="px-8 py-3 bg-tracen text-white rounded-xl font-semibold hover:bg-purple-700 transition-all">
+                    Tentar Novamente
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Timeout -->
+    <div id="timeoutBar" class="fixed bottom-0 left-0 w-full h-1 bg-gray-200"></div>
+
+    <script src="../static/api-handler.js"></script>
+    <script src="../static/app.js"></script>
+</body>
+
+</html>

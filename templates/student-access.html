@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracen Academy - Acesso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-tracen {
+            background-color: #6741d9;
+        }
+
+        .text-tracen {
+            color: #6741d9;
+        }
+
+        .bg-rose-tracen {
+            background-color: #e11d48;
+        }
+
+        .text-rose-tracen {
+            color: #e11d48;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        @keyframes shrink {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+
+        .timeout-bar-valid {
+            background: linear-gradient(90deg, #6741d9 0%, #a78bfa 50%, #c4b5fd 100%);
+            animation: shrink 20s linear forwards;
+        }
+
+        .timeout-bar-invalid {
+            background-color: #e11d48;
+            animation: shrink 20s linear forwards;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(103, 65, 217, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(103, 65, 217, 0.5);
+            }
+        }
+
+        /* Logo de fundo com opacidade */
+        /* Já adicionado como inline style no body */
+    </style>
+</head>
+
+<body class="bg-white flex items-center justify-center min-h-screen relative overflow-hidden"
+    style="background-image: url('../static/img/tracen_academy_logo.png'); background-repeat: no-repeat; background-position: center; background-size: 50%; background-attachment: fixed; background-color: rgba(255, 255, 255, 0.95);">
+
+    <!-- Camada de background escurecida para melhor legibilidade -->
+    <div class="absolute inset-0 bg-white/95 pointer-events-none"></div>
+
+    <!-- Card de Boas-vindas (Sucesso) -->
+    <div id="successCard" class="hidden relative z-10 text-center px-6 max-w-lg animate-scale-in">
+        <!-- Ícone de Sucesso -->
+        <div class="flex justify-center mb-10">
+            <div class="bg-gradient-to-br from-green-100 to-green-200 p-8 rounded-full pulse-glow">
+                <svg class="w-24 h-24 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Nome do Aluno -->
+        <h1 class="text-6xl font-bold text-gray-800 mb-4 animate-slide-down">
+            Boas-vindas, <span class="text-tracen" id="studentName">Aluno</span>!
+        </h1>
+
+        <!-- Data Atual -->
+        <p class="text-2xl text-gray-600 mb-6 animate-slide-down" style="animation-delay: 0.2s;">
+            <span id="currentDate">14 de abril de 2026</span>
+        </p>
+
+        <!-- Frases Motivacionais -->
+        <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-8 rounded-2xl border-l-4 border-tracen mb-10 animate-slide-down"
+            style="animation-delay: 0.4s;">
+            <p class="text-2xl text-tracen italic font-semibold" id="motivationalPhrase">
+                "Cada galope uma história! Dê o seu melhor na pista hoje!"
+            </p>
+        </div>
+
+        <!-- Tempo de Espera -->
+        <p class="text-gray-500 text-lg animate-slide-down" style="animation-delay: 0.6s;">
+            Redirecionando em <span id="countdown" class="font-bold text-tracen text-xl">20</span>s...
+        </p>
+    </div>
+
+    <!-- Card de Erro -->
+    <div id="errorCard" class="hidden relative z-10 text-center px-6 max-w-lg animate-scale-in">
+        <!-- Ícone de Erro -->
+        <div class="flex justify-center mb-10">
+            <div class="bg-gradient-to-br from-rose-100 to-rose-200 p-8 rounded-full">
+                <svg class="w-24 h-24 text-rose-tracen" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="text-5xl font-bold text-gray-800 mb-6 animate-slide-down">
+            Não foi possível<br />
+            validar seu acesso
+        </h1>
+
+        <!-- Mensagem de Erro -->
+        <p class="text-xl text-gray-600 mb-8 animate-slide-down" style="animation-delay: 0.2s;">
+            Procure a secretaria da academia
+        </p>
+
+        <!-- Tempo de Espera -->
+        <p class="text-gray-500 text-lg animate-slide-down" style="animation-delay: 0.4s;">
+            Redirecionando em <span id="errorCountdown" class="font-bold text-rose-tracen text-xl">20</span>s...
+        </p>
+    </div>
+
+    <!-- Barra de Timeout -->
+    <div id="timeoutBar" class="fixed bottom-0 left-0 w-full h-1 bg-gray-200"></div>
+
+    <script src="../static/api-handler.js"></script>
+    <script src="../static/app.js"></script>
+</body>
+
+</html>

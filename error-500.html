@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 - Erro Interno do Servidor | Tracen Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-tracen {
+            background-color: #6741d9;
+        }
+
+        .text-tracen {
+            color: #6741d9;
+        }
+
+        .bg-rose-tracen {
+            background-color: #e11d48;
+        }
+
+        .text-rose-tracen {
+            color: #e11d48;
+        }
+
+        /* Animação de fade in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animação de tremida (shake) para o ícone */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px) rotate(-2deg);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px) rotate(2deg);
+            }
+        }
+
+        /* Animação de pulso */
+        @keyframes pulse-glow-error {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(225, 29, 72, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(225, 29, 72, 0.6);
+            }
+        }
+
+        /* Animação de contagem regressiva */
+        @keyframes countDown {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .error-container {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .error-icon {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        .countdown {
+            animation: countDown 1s ease-in-out infinite;
+        }
+
+        .error-box {
+            animation: fadeIn 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .error-button {
+            animation: fadeIn 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .glow-circle {
+            animation: pulse-glow-error 2s ease-in-out infinite;
+        }
+
+        /* Gradiente animado de fundo com tons vermelhos */
+        .gradient-bg {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+        }
+
+        /* Partículas de erro animadas */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #e11d48;
+            border-radius: 50%;
+            animation: float-particle 3s infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(50px);
+            }
+        }
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <!-- Partículas de fundo -->
+    <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 20%; top: 30%; animation-delay: 0.5s;"></div>
+    <div class="particle" style="left: 80%; top: 40%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 90%; top: 20%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="left: 30%; top: 60%; animation-delay: 2s;"></div>
+
+    <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="grid-error" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e11d48" stroke-width="1" />
+                </pattern>
+            </defs>
+            <rect width="1200" height="600" fill="url(#grid-error)" />
+        </svg>
+    </div>
+
+    <div class="relative z-10 text-center max-w-2xl w-full">
+        <!-- Ícone de erro -->
+        <div class="mb-8 flex justify-center">
+            <div class="relative">
+                <div class="error-icon glow-circle w-32 h-32 mx-auto flex items-center justify-center">
+                    <svg class="w-24 h-24 text-rose-tracen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M 12 8 v 5 m 0 2 v 0.01 M 2.45 19 h 19.1 c 0.9 0 1.6 -0.7 1.4 -1.6 l -8.5 -15 c -0.3 -0.5 -0.8 -0.8 -1.4 -0.8 s -1.1 0.3 -1.4 0.8 l -8.5 15 c -0.2 0.9 0.5 1.6 1.4 1.6 Z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container principal do erro -->
+        <div class="error-box bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+            <!-- Código de erro -->
+            <div class="error-code text-9xl md:text-9xl font-black text-rose-tracen mb-4">500</div>
+
+            <!-- Título -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Erro Interno do Servidor</h1>
+
+            <!-- Descrição -->
+            <p class="text-lg md:text-xl text-gray-600 mb-6">
+                Desculpe, algo deu errado no servidor. Nossa equipe foi notificada e está investigando.
+            </p>
+
+            <!-- Detalhes técnicos -->
+            <div class="bg-red-50 border-l-4 border-rose-tracen rounded p-4 mb-8 text-left">
+                <p class="text-sm text-gray-700">
+                    <span class="font-semibold text-rose-tracen">Código de erro:</span> 500 - Internal Server Error
+                </p>
+                <p class="text-sm text-gray-700 mt-2">
+                    <span class="font-semibold text-rose-tracen">Status:</span> Recuperação em andamento...
+                </p>
+                <p class="text-sm text-gray-700 mt-2">
+                    <span class="font-semibold text-rose-tracen">Redirecionando em:</span>
+                    <span class="countdown inline-block ml-2 font-bold text-rose-tracen text-lg"
+                        id="countdown">10s</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="error-button flex flex-col md:flex-row gap-4 mt-8 justify-center">
+            <a href="index.html"
+                class="px-8 py-4 bg-rose-tracen text-white rounded-xl font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg">
+                ← Voltar para Início
+            </a>
+            <a href="student-access.html"
+                class="px-8 py-4 bg-gray-200 text-gray-800 rounded-xl font-semibold hover:bg-gray-300 transition-all transform hover:scale-105 shadow-lg">
+                Tentar Novamente
+            </a>
+        </div>
+
+        <!-- Informações adicionais -->
+        <div class="mt-12 text-center text-gray-600">
+            <p class="text-sm">
+                Se o problema persistir, entre em contato com o administrador do sistema.
+            </p>
+            <p class="text-xs text-gray-500 mt-2">
+                © 2026 Tracen Academy - Sistema de Controle de Acesso
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown com redirecionamento automático
+        let timeLeft = 10;
+        const countdownElement = document.getElementById('countdown');
+
+        const interval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft + 's';
+
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+
+        // Permitir redirecionamento ao clicar no botão
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                clearInterval(interval);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

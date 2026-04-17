@@ -18,7 +18,7 @@ Este repositório contém o **Módulo do Aluno** do sistema Tracen Academy. É u
 - **Acesso via CPF:** Teclado numérico customizado e formatado para facilitar a entrada de dados em dispositivos touch.
 - **Validação em Tempo Real:** Comunicação com o backend para verificação instantânea de status de matrícula.
 - **Tela de Boas-vindas:** Feedback visual de acesso liberado com exibição de data, hora e frases motivacionais aleatórias.
-- **Barra de Progresso:** Temporizador de 20 segundos para fechamento automático da tela de sucesso.
+- **Barra de Progresso:** Temporizador de 10 segundos para fechamento automático da tela de sucesso.
 
 ## Tecnologias Utilizadas
 - **HTML5 & Tailwind CSS:** Interface moderna, responsiva e otimizada para dispositivos móveis/tablets.

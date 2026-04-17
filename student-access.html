@@ -120,9 +120,7 @@
 
         <!-- Nome do Aluno -->
         <h1 class="text-6xl font-bold text-gray-800 mb-4 animate-slide-down">
-            Boas-vindas, <span
-                class="text-tracen inline-block max-w-full truncate overflow-hidden whitespace-nowrap align-bottom"
-                id="studentName">
+            Boas-vindas, <span class="text-tracen" id="studentName">
                 Aluno
             </span>!
         </h1>
@@ -180,16 +178,6 @@
 
     <script src="../assets/api-handler.js"></script>
     <script src="../assets/app.js"></script>
-    <script>function formatStudentName(name) {
-            if (!name) return "Aluno";
-
-            return name.length > 40
-                ? name.substring(0, 40) + "..."
-                : name;
-        }
-
-        // Quando for inserir:
-        document.getElementById("studentName").innerText = formatStudentName(student.nome);</script>
 </body>
 
 </html>
